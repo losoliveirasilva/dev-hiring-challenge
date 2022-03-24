@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_28_165844) do
+ActiveRecord::Schema.define(version: 2022_03_24_003613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2021_03_28_165844) do
     t.bigint "repository_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "donate_intention"
     t.index ["repository_id"], name: "index_starred_repositories_on_repository_id"
     t.index ["user_id"], name: "index_starred_repositories_on_user_id"
   end

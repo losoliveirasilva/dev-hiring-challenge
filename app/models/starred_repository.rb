@@ -10,6 +10,8 @@ class StarredRepository < ApplicationRecord
 
   validates_uniqueness_of :repository, scope: :user
 
+  enum donate_intention: [:one, :five, :ten]
+
   private
 
   def find_or_create_repository

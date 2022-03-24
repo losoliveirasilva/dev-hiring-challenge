@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   root to: "repositories#index"
 
   resources :repositories, only: %i[index]
-  resources :starred_repositories, only: %i[index create destroy]
+  resources :starred_repositories, only: %i[index create update destroy]
 end

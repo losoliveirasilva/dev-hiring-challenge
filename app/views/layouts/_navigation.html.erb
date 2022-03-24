@@ -1,21 +1,23 @@
 <nav class="navbar navbar-dark navbar-static-top navbar-expand-md">
   <div class="container">
     <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span>
-    </button> <%= link_to "Github Repositories", root_path, class: "navbar-brand" %>
+    </button> <%= link_to t("messages.github_repositories"), root_path, class: "navbar-brand" %>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav mr-auto">
         <% if current_user.present? %>
-          <li class="nav-item"><%= link_to "Favorites", starred_repositories_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to t("messages.favorite"), starred_repositories_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to image_tag("flag-usa.png", class: "locale-flag #{I18n.locale.eql?(:en) ? "active" : "inactive"}"), request.params.merge(locale: "en"), class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to image_tag("flag-brazil.png", class: "locale-flag #{I18n.locale.eql?(:en) ? "inactive" : "active"}"), request.params.merge(locale: "pt-BR"), class: "nav-link" %></li>
         <% end %>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
         <% if current_user.present? %>
-          <li class="nav-item"><%= link_to "Logout", destroy_user_session_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to t("messages.logout"), destroy_user_session_path, class: "nav-link" %></li>
         <% else %>
-          <li class="nav-item"><%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %></li>
-          <li class="nav-item"><%= link_to "Login", new_user_session_path, class: "btn btn-secondary" %></li>
+          <li class="nav-item"><%= link_to t("messages.sign_up"), new_user_registration_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to t("messages.login"), new_user_session_path, class: "btn btn-secondary" %></li>
         <% end %>
       </ul>
     </div>

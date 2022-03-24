@@ -16,6 +16,16 @@ class StarredRepositoriesController < ApplicationController
     end
   end
 
+  def update
+    @starred_repository = StarredRepository.find_by(id: params[:id])
+    @starred_repository.update(update_params)
+
+    respond_to do |format|
+      @starred_repository
+      format.js
+    end
+  end
+
   def destroy
     @starred_repository = StarredRepository.find(params.require(:id))
 
@@ -26,6 +36,10 @@ class StarredRepositoriesController < ApplicationController
   end
 
   private
+
+  def update_params
+    params.permit(:donate_intention)
+  end
 
   def repository_params
     p = params.require(:starred_repository)

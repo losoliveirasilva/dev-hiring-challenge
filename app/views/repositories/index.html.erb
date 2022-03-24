@@ -1,21 +1,21 @@
 <div class="container page-repositories-list">
-  <h1>Search top 10 repositories</h1>
+  <h1><%= t "messages.search_top_10_repositories" %></h1>
 
   <div class="repositories-form">
     <%= form_with url: repositories_path, method: :get, local: true, class: "d-flex" do |form| %>
       <div class="flex-grow-1">
-        <%= form.select :language, Language.pluck(:name, :name), { include_blank: "Select a language", selected: params[:language] }, { class: "form-control" } %>
+        <%= form.select :language, Language.pluck(:name, :name), { include_blank: t("messages.select_a_language"), selected: params[:language] }, { class: "form-control" } %>
       </div>
 
       <div class="col-auto">
-      <%= form.submit "Search", class: "btn btn-primary" %>
+      <%= form.submit t("messages.search"), class: "btn btn-primary" %>
       </div>
     <% end %>
 
   </div>
 
   <div class="repositories-header">
-    <span>Found <%= number_to_human(@total_count, precision: 4) %> <%= "repository".pluralize(@total_count) %></span>
+    <span><%= t("messages.found_n_repositories", total_count: number_to_human(@total_count, precision: 4), count: @total_count) %></span>
   </div>
 
   <div class="repositories-wrapper">
@@ -25,7 +25,7 @@
             <div class="card-body align-items-center row">
               <div class="text-center col-12 col-lg">
                 <h6 class=""><%= number_to_human(repository["stargazers_count"]) %></h6>
-                <span>stars</span>
+                <span><%= t "messages.stars" %></span>
               </div>
 
               <div class="col-12 col-lg-7">
@@ -46,9 +46,9 @@
                     <% end %>
 
                     <% if @user_starred_repositories.include?(repository["external_id"].to_s) %>
-                      <%= button_to "Added", {}, class: "btn btn-success", disabled: true %>
+                      <%= button_to t("messages.added"), {}, class: "btn btn-success", disabled: true %>
                     <% else %>
-                      <%= form.submit "Add to favorites", data: { disable_with: "Adding" }, class: "btn btn-primary", id: repository["external_id"] %>
+                      <%= form.submit t("messages.add_to_favorites"), data: { disable_with: t("messages.adding") }, class: "btn btn-primary", id: repository["external_id"] %>
                     <% end %>
                   <% end %>
                 <% end %>
